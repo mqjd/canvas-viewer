@@ -2,6 +2,7 @@
   "name": "canvas-viewer",
   "displayName": "canvas_viewer",
   "description": "a canvas viewer",
+  "repository": {},
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.95.0"
@@ -12,13 +13,42 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "languages": [
+      {
+        "id": "json",
+        "extensions": [
+          ".canvas"
+        ]
+      }
+    ],
+    "customEditors": [
+      {
+          "viewType": "editor.canvas",
+          "displayName": "CanvasViewer",
+          "priority": "default",
+          "selector": [
+              {
+                  "filenamePattern": "*.canvas"
+              }
+          ]
+      }
+  ],
     "commands": [
       {
         "command": "canvas-viewer.preview",
-        "when": "resourceExtname == '.canvas'",
+        "when": "resourceExtname == '.canvas' ",
         "title": "CanvasPreview"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "canvas-viewer.preview",
+          "when": "resourceExtname == '.canvas' ",
+          "title": "CanvasPreview"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -32,17 +62,33 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.95.0",
+    "@types/jsdom": "^21.1.7",
     "@types/mocha": "^10.0.9",
     "@types/node": "20.x",
+    "@types/vscode": "^1.95.0",
+    "@types/webpack-bundle-analyzer": "^4.7.0",
     "@typescript-eslint/eslint-plugin": "^8.10.0",
     "@typescript-eslint/parser": "^8.7.0",
-    "eslint": "^9.13.0",
-    "typescript": "^5.6.3",
-    "ts-loader": "^9.5.1",
-    "webpack": "^5.95.0",
-    "webpack-cli": "^5.1.4",
     "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "@vscode/test-electron": "^2.4.1",
+    "copy-webpack-plugin": "^12.0.2",
+    "eslint": "^9.13.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "webpack": "^5.95.0",
+    "webpack-bundle-analyzer": "^4.10.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "dompurify": "^3.1.7",
+    "pako": "^2.1.0",
+    "rehype-format": "^5.0.1",
+    "rehype-raw": "^7.0.0",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.1",
+    "unified": "^11.0.5"
   }
 }
