@@ -83,7 +83,7 @@ export const useMxMarkdown = () => {
     if (state && state.shape instanceof mxMarkdown) {
       this.textarea.style.overflow = "auto";
       this.textarea.style.padding = "5px";
-      const scale = this.shapeState.view.scale;
+      const scale = state.view.scale;
       this.textarea.style.height = state.height / scale + "px";
       this.textarea.style.width = state.width / scale + "px";
     }
