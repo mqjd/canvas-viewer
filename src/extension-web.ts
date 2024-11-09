@@ -7,7 +7,7 @@ const jsonToCell = (json: any) => {
   const { x, y, width, height, text, id } = json;
   const cell = new mxCell(
     text,
-    new mxGeometry(x, y, width, height),
+    new mxGeometry(x, y, +width, +height),
     defaultStyle
   );
   cell.vertex = true;

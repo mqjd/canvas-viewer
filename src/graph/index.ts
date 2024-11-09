@@ -1,4 +1,4 @@
-import mx, { initFindWindow } from "./graph";
+import mx, { initFindWindow, useHierarchicalLayout } from "./graph";
 
 mx.mxClient.link("stylesheet", mx.mxClient.basePath + "/css/editor.css");
 
@@ -8,6 +8,8 @@ export const initGraph = (el: HTMLElement, cells: any) => {
   mx.mxResources.add(mx.mxClient.basePath + "/resources/dia", "zh");
   const editorUi = new EditorUi(new Editor(), el);
   initFindWindow(editorUi);
+  console.log(1)
+  useHierarchicalLayout(editorUi);
   const graph = editorUi.editor.graph;
   editorUi.setPageVisible(false);
   // @ts-ignore
