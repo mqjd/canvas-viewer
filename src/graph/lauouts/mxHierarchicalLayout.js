@@ -4462,6 +4462,11 @@ export const useMxHierarchicalLayout = () => {
 
     return placementStage.limitX + this.interHierarchySpacing;
   };
+  mxHierarchicalLayout.prototype.parentBorder = 0;
+  mxHierarchicalLayout.prototype.intraCellSpacing = 60;
+  mxHierarchicalLayout.prototype.interRankCellSpacing = 200;
+  mxHierarchicalLayout.prototype.interHierarchySpacing = 120;
+  mxHierarchicalLayout.prototype.parallelEdgeSpacing = 20;
   mx.mxHierarchicalLayout = mxHierarchicalLayout;
 };
 
@@ -4479,5 +4484,5 @@ export const useHierarchicalLayout = (editorUi) => {
     null,
     Editor.ctrlKey + "+L"
   );
-  editorUi.keyHandler.bindAction(76, true, "horizontalFlow", true); // Ctrl+F
+  editorUi.keyHandler.bindAction(76, true, "horizontalFlow"); // Ctrl+L
 };

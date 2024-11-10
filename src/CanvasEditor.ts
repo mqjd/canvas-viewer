@@ -303,35 +303,9 @@ export class CanvasEditorProvider
     };
     webviewPanel.webview.html = this.getHtmlForWebview(webviewPanel.webview);
 
-    webviewPanel.webview.postMessage({
-      command: "init",
-      data: this.decoder.decode(document.documentData),
-    });
-
-    webviewPanel.webview.onDidReceiveMessage((e) =>
-      this.onMessage(document, e)
+    webviewPanel.webview.onDidReceiveMessage(async (e) =>
+      this.onMessage(document, webviewPanel, e)
     );
-
-    // Wait for the webview to be properly ready before we init
-    webviewPanel.webview.onDidReceiveMessage((e) => {
-      if (e.type === "ready") {
-        if (document.uri.scheme === "untitled") {
-          this.postMessage(webviewPanel, "init", {
-            untitled: true,
-            editable: true,
-          });
-        } else {
-          const editable = vscode.workspace.fs.isWritableFileSystem(
-            document.uri.scheme
-          );
-
-          this.postMessage(webviewPanel, "init", {
-            value: document.documentData,
-            editable,
-          });
-        }
-      }
-    });
   }
 
   private readonly _onDidChangeCustomDocument = new vscode.EventEmitter<
@@ -426,17 +400,36 @@ export class CanvasEditorProvider
     panel.webview.postMessage({ type, body });
   }
 
-  private onMessage(document: CanvasDocument, message: any) {
-    switch (message.type) {
-      case "stroke":
-        document.makeEdit(message as CanvasEdit);
+  private async onMessage(
+    document: CanvasDocument,
+    webviewPanel: vscode.WebviewPanel,
+    message: any
+  ) {
+    switch (message.command) {
+      case "ready":
+        webviewPanel.webview.postMessage({
+          command: "init",
+          data: this.decoder.decode(document.documentData),
+        });
         return;
+      case "open_link":
+        const { file, newTab } = message.data;
+        const files = await vscode.workspace.findFiles(`**/${file}`);
 
-      case "response": {
-        const callback = this._callbacks.get(message.requestId);
-        callback?.(message.body);
+        if (files.length === 0) {
+          vscode.window.showInformationMessage(
+            `Ambiguously File [${message.data}], ${files.length} files found`
+          );
+        } else if (files.length === 1) {
+          await vscode.commands.executeCommand("vscode.open", files[0], {
+            preview: !newTab,
+          });
+        } else {
+          vscode.window.showInformationMessage(
+            `File [${message.data}] Not Found`
+          );
+        }
         return;
-      }
     }
   }
 }

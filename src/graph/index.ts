@@ -8,7 +8,6 @@ export const initGraph = (el: HTMLElement, cells: any) => {
   mx.mxResources.add(mx.mxClient.basePath + "/resources/dia", "zh");
   const editorUi = new EditorUi(new Editor(), el);
   initFindWindow(editorUi);
-  console.log(1)
   useHierarchicalLayout(editorUi);
   const graph = editorUi.editor.graph;
   editorUi.setPageVisible(false);
@@ -17,6 +16,8 @@ export const initGraph = (el: HTMLElement, cells: any) => {
   // @ts-ignore
   window.graph = editorUi.editor.graph;
   graph.addCells(cells);
+
+  editorUi.fitDiagramToWindow();
 };
 
 export * from "./graph";

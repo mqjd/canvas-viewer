@@ -1,16 +1,14 @@
-import rehypeStringify from "rehype-stringify";
-import rehypeFormat from "rehype-format";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import remarkGfm from "remark-gfm";
-import { unified } from "unified";
-
-const processor = unified()
-  .use(remarkParse)
-  .use(rehypeFormat)
-  .use(remarkRehype, { allowDangerousHtml: true })
-  .use(remarkGfm)
-  .use(rehypeStringify, { allowDangerousHtml: true });
+import markdownit from "markdown-it";
+import replaceLink from "./replaceLink";
+const markdownRender = markdownit({
+  html: true, // Enable HTML tags in source
+  xhtmlOut: false, // Use '/' to close single tags (<br />)
+  breaks: true, // Convert '\n' in paragraphs into <br>
+  langPrefix: "language-", // CSS language prefix for fenced blocks
+  linkify: true, // autoconvert URL-like texts to links
+  typographer: true, // Enable smartypants and other sweet transforms
+  sourceMap: true, // Enable source map
+}).use(replaceLink);
 
 import mx from "../mx";
 export const useMxMarkdown = () => {
@@ -61,7 +59,7 @@ export const useMxMarkdown = () => {
       text.style.top = "-5px";
       text.setAttribute("class", "markdown-body");
       md.style.width = "100%";
-      md.innerHTML = processor.processSync(this.markdown).value;
+      md.innerHTML = markdownRender.render(this.markdown);
     }
   };
 

@@ -23,16 +23,16 @@
     ],
     "customEditors": [
       {
-          "viewType": "editor.canvas",
-          "displayName": "CanvasViewer",
-          "priority": "default",
-          "selector": [
-              {
-                  "filenamePattern": "*.canvas"
-              }
-          ]
+        "viewType": "editor.canvas",
+        "displayName": "CanvasViewer",
+        "priority": "default",
+        "selector": [
+          {
+            "filenamePattern": "*.canvas"
+          }
+        ]
       }
-  ],
+    ],
     "commands": [
       {
         "command": "canvas-viewer.preview",
@@ -82,14 +82,7 @@
   },
   "dependencies": {
     "dompurify": "^3.1.7",
-    "pako": "^2.1.0",
-    "rehype-format": "^5.0.1",
-    "rehype-raw": "^7.0.0",
-    "rehype-sanitize": "^6.0.0",
-    "rehype-stringify": "^10.0.1",
-    "remark-gfm": "^4.0.0",
-    "remark-parse": "^11.0.0",
-    "remark-rehype": "^11.1.1",
-    "unified": "^11.0.5"
+    "markdown-it": "^14.1.0",
+    "pako": "^2.1.0"
   }
 }

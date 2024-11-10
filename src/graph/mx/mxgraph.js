@@ -100652,7 +100652,7 @@ EditorUi.prototype.createKeyHandler = function(editor)
 	keyHandler.bindControlShiftKey(35, function() { graph.enterGroup(); }); // Ctrl+Shift+End
 	keyHandler.bindShiftKey(36, function() { graph.home(); }); // Ctrl+Shift+Home
 	keyHandler.bindKey(35, function() { graph.refresh(); }); // End
-	keyHandler.bindAction(80, true, 'print'); // Ctrl+P
+	// keyHandler.bindAction(80, true, 'print'); // Ctrl+P
 	
 	// Zoom keys are best effort for international keyboards, the actual
 	// US keycodes for + is 61 and - is 173. Keypad + is 107 and - is 109.
@@ -100692,7 +100692,7 @@ EditorUi.prototype.createKeyHandler = function(editor)
 		keyHandler.bindAction(69, true, 'editStyle'); // Ctrl+E
 		keyHandler.bindAction(66, true, 'bold'); // Ctrl+B
 		keyHandler.bindAction(66, true, 'toBack', true); // Ctrl+Shift+B
-		keyHandler.bindAction(70, true, 'toFront', true); // Ctrl+Shift+F
+		// keyHandler.bindAction(70, true, 'toFront', true); // Ctrl+Shift+F
 		keyHandler.bindAction(68, true, 'duplicate'); // Ctrl+D
 		keyHandler.bindAction(68, true, 'setAsDefaultStyle', true); // Ctrl+Shift+D   
 		keyHandler.bindAction(90, true, 'undo'); // Ctrl+Z
@@ -100706,9 +100706,9 @@ EditorUi.prototype.createKeyHandler = function(editor)
 		keyHandler.bindAction(77, true, 'editData'); // Ctrl+M
 		keyHandler.bindAction(71, true, 'grid', true); // Ctrl+Shift+G
 		keyHandler.bindAction(73, true, 'italic'); // Ctrl+I
-		keyHandler.bindAction(76, true, 'lockUnlock'); // Ctrl+L
-		keyHandler.bindAction(76, true, 'layers', true); // Ctrl+Shift+L
-		keyHandler.bindAction(80, true, 'format', true); // Ctrl+Shift+P
+		// keyHandler.bindAction(76, true, 'lockUnlock'); // Ctrl+L
+		// keyHandler.bindAction(76, true, 'layers', true); // Ctrl+Shift+L
+		// keyHandler.bindAction(80, true, 'format', true); // Ctrl+Shift+P
 		keyHandler.bindAction(85, true, 'underline'); // Ctrl+U
 		keyHandler.bindAction(85, true, 'ungroup', true); // Ctrl+Shift+U
 		keyHandler.bindAction(109, true, 'decreaseFontSize', true); // Ctrl+Shift+Minus
