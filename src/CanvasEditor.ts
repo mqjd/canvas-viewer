@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { Disposable, disposeAll } from "./dispose";
-
+import path from "path";
 /**
  * Define the type of edits used in paw draw files.
  */
@@ -296,10 +296,10 @@ export class CanvasEditorProvider
   ): Promise<void> {
     // Add the webview to our internal set of active webviews
     this.webviews.add(document.uri, webviewPanel);
-
     // Setup initial content for the webview
     webviewPanel.webview.options = {
       enableScripts: true,
+      enableCommandUris: true,
     };
     webviewPanel.webview.html = this.getHtmlForWebview(webviewPanel.webview);
 
@@ -344,6 +344,16 @@ export class CanvasEditorProvider
     return document.backup(context.destination, cancellation);
   }
 
+
+  private getNonce() {
+	let text = '';
+	const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	for (let i = 0; i < 32; i++) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	return text;
+}
+
   //#endregion
 
   /**
@@ -353,7 +363,7 @@ export class CanvasEditorProvider
     const base_path = webview.asWebviewUri(
       vscode.Uri.joinPath(this._context.extensionUri, "dist")
     );
-
+    const nonce = this.getNonce();
     return /* html */ `
       <!DOCTYPE html>
       <html lang="en">
@@ -362,14 +372,13 @@ export class CanvasEditorProvider
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Canvas Preview</title>
-        <script>
-          window.mxBasePath = "${base_path}/"
-        </script>
+        <link rel="stylesheet" crossorigin nonce="${nonce}" href="${base_path}/graph.css">
       </head>
 
       <body>
         <div id="app"></div>
-        <script src="${base_path}/extension-web.js"></script>
+        <script nonce="${nonce}" src="${base_path}/graph.js"></script>
+        <script nonce="${nonce}" src="${base_path}/extension-web.js"></script>
       </body>
 
       </html>

@@ -1,9 +1,14 @@
 # Canvas-Viewer README
 
-canvas-viewer
+A json-canvas viewer
 
-## package 
+## How to use?
 
-```shell
-vsce package -o dist/
-```
+
+- Keybindings
+
+| Shortcuts       | Functionality    |
+|-----------------|------------------|
+| Cmd-L or Ctrl-L | Format Graph     |
+| Cmd-M or Ctrl-M | Graph Fit Window |
+| Cmd-F or Ctrl-F | Graph Search     |
