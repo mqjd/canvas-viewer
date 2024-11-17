@@ -1,9 +1,9 @@
 {
   "name": "canvas-viewer",
-  "displayName": "canvas_viewer",
+  "displayName": "Canvas Viewer",
   "description": "a canvas viewer",
   "repository": {},
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "MQJD",
   "icon": "favicon.png",
   "engines": {
@@ -53,11 +53,12 @@
     }
   },
   "scripts": {
+    "build": "vsce package -o dist/",
+    "publish": "vsce publish",
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
     "watch": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
-    "build": "vsce package -o dist/",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
