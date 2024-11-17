@@ -3,7 +3,7 @@
   "displayName": "Canvas Viewer",
   "description": "a canvas viewer",
   "repository": {},
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "MQJD",
   "icon": "favicon.png",
   "engines": {
