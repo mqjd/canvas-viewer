@@ -4,6 +4,8 @@
   "description": "a canvas viewer",
   "repository": {},
   "version": "0.0.2",
+  "publisher": "MQJD",
+  "icon": "favicon.png",
   "engines": {
     "vscode": "^1.95.0"
   },
